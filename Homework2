@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class sqrUravnenie {
+
+    static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+
+        double a = readVvod("a");
+        double b = readVvod("b");
+        double c = readVvod("c");
+
+        String reshenie = sqrReshenie(a, b, c);
+        System.out.println(reshenie);
+    }
+
+    public static double readVvod(String name) {
+        System.out.print("Enter " + name + ": ");
+        return scanner.nextDouble();
+    }
+
+    public static double disCalc(double a, double b, double c) {
+        return (Math.pow(b, 2)) - 4 * a * c;
+    }
+
+    public static String sqrReshenie(double a, double b, double c) {
+
+        double d = disCalc(a, b, c);
+
+        if (a != 0 && b != 0 && c != 0) {
+            if (d > 0) {
+                return "Уравнение имеет два коря: " + "\n" + "х1 = " + (-b + Math.sqrt(d)) / (2 * a) + "\n" +
+                        "х2 = " + (-b - Math.sqrt(d)) / (2 * a);
+            } else if (d == 0) {
+                return "Уравнение имеет один корень:" + "\n" + "x = " + (-b) / (2 * a);
+            } else {
+                return "На множестве действительных чисел корней нет!";
+            }
+        } else if (a == 0 && b != 0 && c != 0) {
+            return "Уравнение имеет один корень:" + "\n" + "х = " + (-c) / b;
+        } else if (a != 0 && b == 0 && c == 0) {
+            return "Уравнение имеет один корень:" + "\n" + "х = 0";
+        } else if (a != 0 && b == 0 && c != 0) {
+            if ((-c) / a > 0) {
+                return "Уравнение имеет два коря:" + "\n" + "х1 = " + (-Math.sqrt((-c / a))) + "\n"
+                        + "х2 = " + (Math.sqrt((-c / a)));
+            } else {
+                return "На множестве действительных чисел корней нет!";
+            }
+        } else if (a != 0 && b != 0 && c == 0) {
+            return "Уравнение имеет два коря:" + "\n" +  "х1 = 0" + "\n" + "х2 = " + (-b / a);
+        }
+        return "Критическая ошибка!!!";
+    }
+}
